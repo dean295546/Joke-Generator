@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Joke Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        #joke { margin: 20px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Random Joke Generator</h1>
+    <div id="joke">Click the button to get a joke!</div>
+    <button onclick="fetchJoke()">Get a Joke</button>
+
+    <script>
+        async function fetchJoke() {
+            const response = await fetch('https://v2.jokeapi.dev/joke/Any');
+            const data = await response.json();
+            const jokeBox = document.getElementById('joke');
+            
+            if (data.type === "single") {
+                jokeBox.innerHTML = data.joke;
+            } else {
+                jokeBox.innerHTML = `${data.setup}<br><br>${data.delivery}`;
+            }
+        }
+    </script>
+</body>
+</html>
